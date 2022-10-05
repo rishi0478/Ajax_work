@@ -1,0 +1,100 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <script src="{% static 'css/js/bootstrap.js' %}"></script>
+    <script src="{% static 'css/js/jquery.js' %}"></script>
+    <script src="{% static 'css/js/ajax.js' %}"></script>
+
+</head>
+<style>
+   .custom-css{ display: grid;
+    padding: 20px 35px;
+    outline:none
+}
+.sbmtbtn {
+   
+    border-radius: 10px;
+    width: 50%;
+    color: black;
+    background: #d1ecf1;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px 60px;
+}
+</style>
+<body>
+
+    <div class="container mt-5">
+        <h2 class="text-center alert alert-danger">Crud Project without Refresh</h2>
+        
+
+        <div class="row">
+            <div class="col-sm-4">
+                <h4 class="text-center alert alert-info">Add/Update</h4>
+                <form action="" method="post" class="custom-css">
+                    {% csrf_token %}
+                    <input type="text" name="key" id="usr_id" hidden>
+                    {{form}}
+
+                    <br>
+
+                    <div class="alert alert-primary" id="hid_div" role="alert" hidden>
+                        <span id="msg" >hello</span>
+                      </div>
+                      <!-- <div class="alert alert-primary" id="hid_div_email" role="alert">
+                        Enter Your Email
+                      </div> -->
+
+                    <button type="button" id="btn" class="sbmtbtn ">Submit</button>
+                </form>
+            </div>
+
+            <div class="col-sm-7">
+                <h4 class="text-center alert alert-info ">Show information</h4>
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Password</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead> 
+                    <tbody id="tbody">
+                        {% for i in data %}
+                        <tr>
+                            <td>{{i.id}}</td>
+                            <td>{{i.name}}</td>
+                            <td>{{i.email}}</td>
+                            <td>{{i.password}}</td>
+                            <td><input type="button" id="edit-btn" class="btn btn-outline-primary" data="{{i.id}}" value="Edit"> <td><input type="button" id="delete-btn" data="{{i.id}}" class="btn btn-outline-dark cc"  value="Delete"></td></td>
+                            
+                            
+
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+        </div>
+
+    </div>
+</body>
+
+
+</html>
